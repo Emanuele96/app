@@ -1,18 +1,17 @@
 package com.emanuele.app.model.customSerialization;
 
-import com.emanuele.app.model.PowerSystemRightNowResponse;
+import com.emanuele.app.model.PowerSystemTimepoint;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
+import java.time.Instant;
 
-public class PowerSystemTimepointDeserializer implements JsonDeserializer<PowerSystemRightNowResponse.PowerSystemTimepoint> {
+public class PowerSystemTimepointDeserializer implements JsonDeserializer<PowerSystemTimepoint> {
 
-    public PowerSystemRightNowResponse.PowerSystemTimepoint deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public PowerSystemTimepoint deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-
-        PowerSystemRightNowResponse.PowerSystemTimepoint timepoint = new PowerSystemRightNowResponse.PowerSystemTimepoint();
-        timepoint.setMinutes1UTC(jsonObject.get("Minutes1UTC").getAsString());
-        timepoint.setMinutes1DK(jsonObject.get("Minutes1DK").getAsString());
+        PowerSystemTimepoint timepoint = new PowerSystemTimepoint();
+        timepoint.setTimestamp(Instant.parse(jsonObject.get("Minutes1UTC").getAsString() + 'Z').getEpochSecond());
         timepoint.setCo2Emission(getDoubleValue(jsonObject, "CO2Emission"));
         timepoint.setProductionGe100MW(getDoubleValue(jsonObject, "ProductionGe100MW"));
         timepoint.setProductionLt100MW(getDoubleValue(jsonObject, "ProductionLt100MW"));
@@ -21,8 +20,14 @@ public class PowerSystemTimepointDeserializer implements JsonDeserializer<PowerS
         timepoint.setOnshoreWindPower(getDoubleValue(jsonObject, "OnshoreWindPower"));
         timepoint.setExchangeSum(getDoubleValue(jsonObject, "Exchange_Sum"));
         timepoint.setExchangeDK1DE(getDoubleValue(jsonObject, "Exchange_DK1_DE"));
-        // Add similar lines for other properties
-
+        timepoint.setExchangeDK1NL(getDoubleValue(jsonObject, "Exchange_DK1_NL"));
+        timepoint.setExchangeDK1GB(getDoubleValue(jsonObject, "Exchange_DK1_GB"));
+        timepoint.setExchangeDK1NO(getDoubleValue(jsonObject, "Exchange_DK1_NO"));
+        timepoint.setExchangeDK1SE(getDoubleValue(jsonObject, "Exchange_DK1_SE"));
+        timepoint.setExchangeDK1DK2(getDoubleValue(jsonObject, "Exchange_DK1_DK2"));
+        timepoint.setExchangeDK2DE(getDoubleValue(jsonObject, "Exchange_DK2_DE"));
+        timepoint.setExchangeDK2SE(getDoubleValue(jsonObject, "Exchange_DK2_SE"));
+        timepoint.setExchangeBornholmSE(getDoubleValue(jsonObject, "Exchange_Bornholm_SE"));
         return timepoint;
     }
 

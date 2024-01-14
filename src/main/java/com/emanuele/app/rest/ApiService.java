@@ -1,7 +1,8 @@
-package com.emanuele.app.service;
+package com.emanuele.app.rest;
 
-import com.emanuele.app.api.EnergiDataServiceApi;
+import com.emanuele.app.model.interfaces.EnergiDataServiceApi;
 import com.emanuele.app.model.PowerSystemRightNowResponse;
+import com.emanuele.app.model.PowerSystemTimepoint;
 import com.emanuele.app.model.customSerialization.PowerSystemRightNowResponseDeserializer;
 import com.emanuele.app.model.customSerialization.PowerSystemRightNowResponseSerializer;
 import com.emanuele.app.model.customSerialization.PowerSystemTimepointDeserializer;
@@ -21,7 +22,7 @@ public class ApiService {
     Gson getGson() {
         return new GsonBuilder().registerTypeAdapter(PowerSystemRightNowResponse.class, new PowerSystemRightNowResponseDeserializer())
                 .registerTypeAdapter(PowerSystemRightNowResponse.class, new PowerSystemRightNowResponseSerializer())
-                .registerTypeAdapter(PowerSystemRightNowResponse.PowerSystemTimepoint.class, new PowerSystemTimepointDeserializer())
+                .registerTypeAdapter(PowerSystemTimepoint.class, new PowerSystemTimepointDeserializer())
                 .create();
 
     }
@@ -35,7 +36,7 @@ public class ApiService {
         energiDataServiceApi = retrofit.create(EnergiDataServiceApi.class);
     }
 
-    public Observable<PowerSystemRightNowResponse> getPowerSystemStatus(){
-        return energiDataServiceApi.getPowerSystemRightNowStatus();
+    public Observable<PowerSystemRightNowResponse> getPowerSystemStatus(int limit, int offset){
+        return energiDataServiceApi.getPowerSystemRightNowStatus(limit, offset);
     }
 }
