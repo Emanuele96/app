@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 public interface EnergiDataServiceApi {
     @GET("dataset/PowerSystemRightNow")
-    Observable<PowerSystemRightNowResponse> getPowerSystemRightNowStatus(@Query("limit") int limit, @Query("offset") int offset);
+    Observable<PowerSystemRightNowResponse> getPowerSystemRightNowStatus(@Query("limit") int limit, @Query("offset") int offset, @Query("sort")String sort);
 
 }

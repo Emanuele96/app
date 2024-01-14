@@ -13,7 +13,14 @@ public class DataProcessorService {
     private DataProcessorArchiver dataProcessorArchiver;
 
     DataProcessorService(){}
-
+    /**
+     * Calculates the average of each property of a list of PowerSystemTimepoint
+     * returning an unique datapoint with average values.
+     * Timestamp of the latest datapoint is used.
+     *
+     * @param  values {@code List<PowerSystemTimepoint>} with the elements to include in the average
+     * @return      {@code PowerSystemTimepoint} A datapoint with the average of all the properties
+     */
     public PowerSystemTimepoint calculateAveragePowerSystemValues(List<PowerSystemTimepoint> values ){
         PowerSystemTimepoint timepoint = new PowerSystemTimepoint();
         timepoint.setTimestamp(values.getFirst().getTimestamp());

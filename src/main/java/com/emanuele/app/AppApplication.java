@@ -32,9 +32,9 @@ public class AppApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
 		LOG.info("\n\n\n\n Starting the application \n\n");
 
-		Observable.interval(10, TimeUnit.SECONDS, Schedulers.io())
+		Observable.interval(3, TimeUnit.SECONDS, Schedulers.io())
 				.observeOn(Schedulers.newThread())
-				.map(tick -> apiService.getPowerSystemStatus(5, 0))
+				.map(tick -> apiService.getPowerSystemStatus(5, 0, "Minutes1UTC DESC"))
 				.doOnError(error -> LOG.error(error.toString()))
 				.retry()
 				.subscribe(apiObservable -> apiObservable.subscribe(apiResponse -> {
@@ -49,7 +49,7 @@ public class AppApplication implements CommandLineRunner {
 					}
 				}));
 
-		Thread.sleep(100000);
+		Thread.sleep(Long.MAX_VALUE);
 
 		LOG.info("\n\n\t\t\t Shutting down... ");
 

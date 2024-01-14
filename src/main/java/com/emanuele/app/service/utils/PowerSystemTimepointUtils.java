@@ -9,6 +9,14 @@ public class PowerSystemTimepointUtils {
     private PowerSystemTimepointUtils() {
     }
 
+    /**
+     * Calculates the average of a given propertu from a list of PowerSystemTimepoint
+     * returning the average
+     *
+     * @param  timepoints {@code List<PowerSystemTimepoint>} with the elements to include in the average
+     * @param  propertyNameGetter {@code String} property name getter to use in the average calculation
+     * @return      {@code Double} A double with the average value
+     */
     public static Double calculateAverageOnPropertyName(List<PowerSystemTimepoint> timepoints, String propertyNameGetter) {
 
         try {

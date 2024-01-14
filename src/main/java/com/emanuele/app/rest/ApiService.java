@@ -36,7 +36,7 @@ public class ApiService {
         energiDataServiceApi = retrofit.create(EnergiDataServiceApi.class);
     }
 
-    public Observable<PowerSystemRightNowResponse> getPowerSystemStatus(int limit, int offset){
-        return energiDataServiceApi.getPowerSystemRightNowStatus(limit, offset);
+    public Observable<PowerSystemRightNowResponse> getPowerSystemStatus(int limit, int offset, String sort){
+        return energiDataServiceApi.getPowerSystemRightNowStatus(limit, offset, sort);
     }
 }
